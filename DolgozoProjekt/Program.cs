@@ -19,7 +19,17 @@ namespace DolgozoProjekt
             Feladat4();
             Feladat5();
             Feladat6();
-            Feladat7();
+
+            Console.WriteLine("7. Feladat: Diákok száma életkor szerint csoportosítva:");
+            Feladat7(15);
+            Feladat7(10);
+            Feladat7(17);
+            Feladat7(13);
+            Feladat7(11);
+            Feladat7(12);
+            Feladat7(16);
+            Feladat7(14);
+
             Feladat8();
 
             Console.ReadKey();
@@ -107,39 +117,42 @@ namespace DolgozoProjekt
 
             foreach (var dolgozo in dolgozok)
             {
-                if (dolgozok.FindAll(d => d.Fizetes > asd).Count > 0)
+                if (dolgozok.FindAll(a => a.Fizetes > asd).Count > 0)
                 {
-                    Console.WriteLine("Van olyan dolgozó, akinek a fizetése " + asd  + " Ft felett van");
+                    Console.WriteLine("\tVan olyan dolgozó, akinek a fizetése " + asd  + " Ft felett van");
                     break;
                 }
 
                 else
                 {
-                    Console.WriteLine("Nincs olyan dolgozó, akinek a fizetése " + asd + " Ft felett van");
+                    Console.WriteLine("\tNincs olyan dolgozó, akinek a fizetése " + asd + " Ft felett van");
                     break;
                 }
             }
         }
 
-        private static void Feladat7()
+        private static void Feladat7(int kor)
         {
-            int diakKor14 = 0;
+            int diakKor = 0;
 
-            foreach (var diakDolgozo in dolgozok)
+            for (int i = 0; i < dolgozok.Count; i++)
             {
-                if (diakDolgozo.Eletkor == 14)
+                if (dolgozok[i].Eletkor == kor)
                 {
-                    diakKor14++;
+                    diakKor++;
                 }
-                Console.WriteLine("14 éves: " + diakKor14 +  " fő");
+                
             }
+            Console.WriteLine("\t" + kor + " éves: " + diakKor + " fő");
+
+            // Linq: dolgozok.FindAll(a => a.Eletkor <= 17).GroupBy();
         }
 
         private static void Feladat8()
         {
             using (StreamWriter sw = new StreamWriter("diakok.txt", false, Encoding.UTF8))
             {
-                foreach (var diakDolgozo in dolgozok)
+                foreach (var diakDolgozo in dolgozok) // dolgozok.FindAll(a => a.Eletkor <= 17)
                 {
                     if (diakDolgozo.Eletkor < 18)
                     {
